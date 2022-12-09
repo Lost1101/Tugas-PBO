@@ -251,7 +251,7 @@ class reset{
 
     public function reset(){
         $db = $this->mysqli->conn;
-        $reset = "DELETE FROM antrian WHERE status = selesai";
+        $reset = "DELETE a1 FROM antrian a1 INNER JOIN antrian a2 WHERE a1.status = 'selesai' AND a1.status = a2.status";
             $query = $db->query($reset);
 
         return $query;
