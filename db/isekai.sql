@@ -28,7 +28,7 @@ CREATE TABLE `antrian` (
   `meja` int(2) NOT NULL,
   `status` varchar(30) NOT NULL,
   PRIMARY KEY (`no_antri`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `antrian` (
 
 LOCK TABLES `antrian` WRITE;
 /*!40000 ALTER TABLE `antrian` DISABLE KEYS */;
-INSERT INTO `antrian` VALUES (11,'Anya',11,'selesai'),(12,'Awikwok',14,'waiting');
+INSERT INTO `antrian` VALUES (3,'AA',2,'selesai'),(4,'aaa',1,'waiting'),(5,'aa',1,'selesai'),(6,'aa',2,'selesai'),(7,'aaaa',4,'selesai'),(8,'gggg',6,'selesai'),(9,'jjj',2,'selesai'),(10,'jjjj',7,'selesai');
 /*!40000 ALTER TABLE `antrian` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,7 +65,7 @@ CREATE TABLE `tbl_menu` (
 
 LOCK TABLES `tbl_menu` WRITE;
 /*!40000 ALTER TABLE `tbl_menu` DISABLE KEYS */;
-INSERT INTO `tbl_menu` VALUES ('M01','Ramen Anya Inakute',99,25000,'6391c5fc84afd.png','makanan'),('M02','Sushi Kaori Cicak',89,20000,'sushi.jpg','makanan'),('M03','Sashimi Korosensei',97,18000,'sashimi.jpg','makanan'),('M04','Yakiniku Makima',100,27000,'yakiniku.jpg','makanan'),('M05','Bento Megumin',97,22000,'bento.jpeg','makanan'),('M06','Coca cola',99,7000,'cocacola.png','minuman'),('M07','Pepsi',87,6000,'pepsi.jpg','minuman'),('M08','Air Putih',99,4000,'airputih.jpg','minuman'),('M09','Green Tea',98,7000,'grinti.jpg','minuman'),('M10','Teh Botol',98,7000,'tebotol.jpg','minuman'),('M11','Oplosan Maoet:v',20,20000,'6391c9e6ef41b.jpg','minuman'),('M12','Donat Rengoku',146,15000,'6391be652ed4f.jpg','Makanan');
+INSERT INTO `tbl_menu` VALUES ('M01','Ramen Anya Sabishii',23,25000,'63956d8e730ec.png','makanan'),('M02','Yakiniku Makima',90,25000,'639591bdc61f2.jpg','makanan'),('M03','Coca cola',93,7000,'639698b34382c.png','minuman'),('M04','Sashimi Korosensei',95,20000,'63969591040d8.jpg','makanan'),('M05','Bento Megumin',96,24000,'639697acd21dd.jpeg','makanan'),('M06','Sushi Kaori Cicak',96,22000,'639697ce48216.jpg','makanan'),('M07','Pepsi',99,6500,'6396980791a0e.jpg','minuman'),('M08','Green Tea',97,8000,'63969835c9943.jpg','minuman'),('M09','Teh Botol',98,7000,'639698a0bc078.jpg','minuman'),('M10','Air Putih',96,4000,'6396988b407cc.jpg','minuman');
 /*!40000 ALTER TABLE `tbl_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,20 +78,20 @@ DROP TABLE IF EXISTS `tbl_transaksi`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tbl_transaksi` (
   `id_transaksi` int(3) NOT NULL AUTO_INCREMENT,
-  `ramen` int(11) NOT NULL,
-  `sushi` int(11) NOT NULL,
-  `sashimi` int(11) NOT NULL,
-  `yakiniku` int(11) NOT NULL,
-  `bento` int(11) NOT NULL,
-  `coca_cola` int(11) NOT NULL,
-  `pepsi` int(11) NOT NULL,
-  `air_putih` int(11) NOT NULL,
-  `grinti` int(11) NOT NULL,
-  `teh_botol` int(11) NOT NULL,
   `status` varchar(30) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `Ramen_Anya_Sabishii` int(11) DEFAULT NULL,
+  `Yakiniku_Makima` int(11) NOT NULL,
+  `Coca_cola` int(11) DEFAULT NULL,
+  `Sashimi_Korosensei` int(11) NOT NULL,
+  `Bento_Megumin` int(11) NOT NULL,
+  `Sushi_Kaori_Cicak` int(11) NOT NULL,
+  `Pepsi` int(11) NOT NULL,
+  `Green_Tea` int(11) NOT NULL,
+  `Teh_Botol` int(11) DEFAULT NULL,
+  `Air_Putih` int(11) NOT NULL,
   PRIMARY KEY (`id_transaksi`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +100,7 @@ CREATE TABLE `tbl_transaksi` (
 
 LOCK TABLES `tbl_transaksi` WRITE;
 /*!40000 ALTER TABLE `tbl_transaksi` DISABLE KEYS */;
-INSERT INTO `tbl_transaksi` VALUES (10,4,0,0,0,0,0,0,0,0,0,'selesai','2022-12-08 15:09:16'),(11,1,0,0,0,1,1,0,0,0,1,'selesai','2022-12-08 15:11:51'),(12,0,0,2,0,2,0,3,0,2,0,'waiting','2022-12-08 15:08:01');
+INSERT INTO `tbl_transaksi` VALUES (1,'selesai','2022-12-11 08:27:58',2,1,1,0,0,0,0,0,0,0),(2,'selesai','2022-12-12 06:04:13',2,0,0,0,0,0,1,0,0,0),(3,'selesai','2022-12-12 17:10:06',0,2,0,0,0,0,0,0,0,1),(4,'waiting','2022-12-12 17:06:06',2,0,1,0,0,0,0,0,0,0),(5,'selesai','2022-12-12 18:10:21',0,0,0,0,0,0,0,0,0,2),(6,'selesai','2022-12-12 18:10:22',0,0,0,1,0,0,0,0,0,0),(7,'selesai','2022-12-12 18:10:24',1,0,0,0,0,0,0,0,0,0),(8,'selesai','2022-12-12 18:10:19',0,0,0,0,0,4,0,0,0,0),(9,'selesai','2022-12-12 18:10:25',0,0,0,3,1,0,0,0,2,1),(10,'selesai','2022-12-12 18:10:26',0,0,0,1,3,0,0,3,0,0);
 /*!40000 ALTER TABLE `tbl_transaksi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,4 +139,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-08 22:17:20
+-- Dump completed on 2022-12-14 16:47:15

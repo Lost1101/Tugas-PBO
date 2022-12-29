@@ -148,6 +148,8 @@ class manipmenu extends manipulasi{
         $harga = htmlspecialchars($data['harga']);
         $jenis = htmlspecialchars($data['jenis']);
 
+        $name = str_replace(' ', '_', $nama);
+
         $img = upload();
         if( !$img){
             return false;
@@ -157,17 +159,27 @@ class manipmenu extends manipulasi{
             ('$id','$nama','$stok','$harga','$img','$jenis')";
             $query = $db->query($inputmenu);
 
+        $addtransaksi = "ALTER TABLE tbl_transaksi ADD COLUMN $name INT(11) NOT NULL";
+        $db->query($addtransaksi);
+
         return $query;
     }
 
     public function edit($data, $id){
         $db = $this->mysqli->conn;
 
+       $getoldname = mysqli_query($db, "SELECT * FROM tbl_menu WHERE id_menu = '$id'");
+       $qry    =mysqli_fetch_array($getoldname);
+       $oldname = $qry['nama'];
+       $name = str_replace(' ', '_', $oldname);
+
         $id = htmlspecialchars($data['id']);
         $nama = htmlspecialchars($data['nama']);
         $stok = htmlspecialchars($data['stok']);
         $harga = htmlspecialchars($data['harga']);
         $jenis = htmlspecialchars($data['jenis']);
+
+        $name2 = str_replace(' ', '_', $nama);
 
         $img = upload();
         if( !$img){
@@ -178,13 +190,24 @@ class manipmenu extends manipulasi{
             id_menu='$id', nama='$nama', stok='$stok', harga='$harga', img='$img', jenis='$jenis' WHERE id_menu = '$id'";
             $query = $db->query($inputmenu);
 
+        $edittransaksi = "ALTER TABLE tbl_transaksi CHANGE $name $name2 INT(11)";
+        $db->query($edittransaksi);
+
         return $query;
     }
 
     public function hapus($id){
         $db = $this->mysqli->conn;
+        $tampildat    =mysqli_query($db, "SELECT * FROM tbl_menu WHERE id_menu = '$id'");
+        $dat    =mysqli_fetch_array($tampildat);
+        $nama = $dat['nama'];
+        $name = str_replace(' ', '_', $nama);
+
         $delmenu = "DELETE FROM tbl_menu WHERE id_menu = '$id'";
             $query = $db->query($delmenu);
+
+        $delcolumn = "ALTER TABLE tbl_transaksi DROP COLUMN $name";
+        $db->query($delcolumn);
 
         return $query;
     }

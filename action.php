@@ -6,7 +6,6 @@ $user = new manipuser($connection);
 $reset = new reset($connection);
 
     if($_GET['aksi']=="tambahmenu"){
-        $id = $_GET['id'];
         if($menu->tambah($_POST) > 0 ){
             echo "<script>alert('Menu berhasil ditambah!');
             document.location='./menu.php';

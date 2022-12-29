@@ -7,11 +7,25 @@ $menu = new menu($connection);
 $conn = $connect->connect();
 
 if ($_GET['aksi']=="insert") {
-    $pesan = "INSERT INTO tbl_transaksi VALUES ('', '$_POST[M01]', '$_POST[M02]', '$_POST[M03]', '$_POST[M04]', '$_POST[M05]', '$_POST[M06]', '$_POST[M07]', '$_POST[M08]', '$_POST[M09]', '$_POST[M10]', 'waiting', CURRENT_TIMESTAMP)";
+    $tampilmenu = $menu->tampilmenu();
+    $pesan = "INSERT INTO tbl_transaksi (id_transaksi, status, date) VALUES ('', 'waiting', CURRENT_TIMESTAMP)";
     mysqli_query($conn, $pesan);
+
+    $sqlid    =mysqli_query($conn, "SELECT * FROM tbl_transaksi ORDER BY id_transaksi DESC LIMIT 1");
+    $getid    =mysqli_fetch_array($sqlid);
+    $id = $getid['id_transaksi'];
+
+    while ($mnu = $tampilmenu->fetch_array()){
+        $name = $mnu['id_menu'];
+        $nama = str_replace(' ', '_', $mnu['nama']);
+        $namaa = $_POST[$name];
+        $pesan2 = "UPDATE tbl_transaksi SET $nama = '$namaa' WHERE id_transaksi = $id";
+        mysqli_query($conn, $pesan2);
+    }
 
     $antrian = "INSERT INTO antrian VALUES ('', '$_POST[nama]', '$_POST[meja]', 'waiting')";
     mysqli_query($conn, $antrian);
+    $aa = mysqli_affected_rows($conn);
     
     $tampilmenu = $menu->tampilmenu();
         while ($row = $tampilmenu->fetch_array()) {
@@ -23,22 +37,23 @@ if ($_GET['aksi']=="insert") {
             }
         }
 
-    if(mysqli_affected_rows($conn) > 0){
-        echo "<script>alert('Berhasil memesan!');
-        document.location='./pesan.php';
-        </script>";
-    } else {
-        echo "<script>alert('Gagal memesan...');
-        document.location='./pesan.php';
-        </script>";
-    }
+            if($aa > 0){
+                echo "<script>alert('Berhasil memesan!');
+                document.location='./pesan.php';
+                </script>";
+            } else {
+                echo "<script>alert('Gagal memesan...');
+                document.location='./pesan.php';
+                </script>";
+            }
 }
 
 if ($_GET['aksi']=="update") {
-    $upd = "UPDATE tbl_transaksi SET status='selesai' WHERE id_transaksi=$_GET[no]";
+    $no = $_GET['no'];
+    $upd = "UPDATE tbl_transaksi SET status='selesai' WHERE id_transaksi=$no";
     $conn->query($upd);
 
-    $updantri = "UPDATE antrian SET status='selesai' WHERE no_antri=$_GET[no]";
+    $updantri = "UPDATE antrian SET status='selesai' WHERE no_antri=$no";
     $conn->query($updantri);
     
     header("location: tampil.php");

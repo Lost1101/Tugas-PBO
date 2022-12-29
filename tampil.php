@@ -128,7 +128,8 @@ ob_start();
 					<?php
                     $no=1;
 					$tampil = $menu->selesai();
-					while($row = $tampil->fetch_array()){?>
+					while($row = $tampil->fetch_array()){
+					?>
 					<form class="d-flex flex-wrap justify-content-evenly" action="aksi.php?aksi=update" method="post">
 					  <div class="col-sm-6 col-md-3">
 					    <div class="thumbnail">
@@ -139,66 +140,15 @@ ob_start();
 												<td class=" "><b>Menu</b></td>
 												<td class=" "><b>Qty</b></td>
 											</tr>
+											<?php
+												$tampilmenu = $menu->tampilmenu();
+												while ($mnu = $tampilmenu->fetch_array()){
+														$nama = str_replace(' ', '_', $mnu['nama']);
+													if($row[$nama]){?>
 											<tr class=" ">
-												<?php if($row['ramen']){?>
-													<td class=" ">Ramen Anya Sabishii</td>
-													<td class=" "><?php echo $row['ramen'];?></td>
-												<?php	};?>
-											</tr>
-											<tr class=" ">
-												<?php if($row['sushi']){?>
-													<td class=" ">Sushi Kaori Cicak</td>
-													<td class=" "><?php echo $row['sushi'];?></td>
-												<?php	};?>
-											</tr>
-											<tr class=" ">
-												<?php if($row['sashimi']){?>
-													<td class=" ">Sashimi Korosensei</td>
-													<td class=" "><?php echo $row['sashimi'];?></td>
-												<?php	};?>
-											</tr>
-											<tr class=" ">
-												<?php if($row['yakiniku']){?>
-													<td class=" ">Yakiniku Makima</td>
-													<td class=" "><?php echo $row['yakiniku'];?></td>
-												<?php	};?>
-											</tr>
-											<tr class=" ">
-												<?php if($row['bento']){?>
-													<td class=" ">Bento Megumin</td>
-													<td class=" "><?php echo $row['bento'];?></td>
-												<?php	};?>
-											</tr>
-											<tr class=" ">
-												<?php if($row['coca_cola']){?>
-													<td class=" ">Coca Cola</td>
-													<td class=" "><?php echo $row['coca_cola'];?></td>
-												<?php	};?>
-											</tr>
-											<tr class=" ">
-												<?php if($row['pepsi']){?>
-													<td class=" ">Pepsi</td>
-													<td class=" "><?php echo $row['pepsi'];?></td>
-												<?php	};?>
-											</tr>
-											<tr class=" ">
-												<?php if($row['air_putih']){?>
-													<td class=" ">Air Putih</td>
-													<td class=" "><?php echo $row['air_putih'];?></td>
-												<?php	};?>
-											</tr>
-                                            <tr class=" ">
-												<?php if($row['grinti']){?>
-													<td class=" ">Green tea</td>
-													<td class=" "><?php echo $row['grinti'];?></td>
-												<?php	};?>
-											</tr>
-
-                                            <tr class=" ">
-												<?php if($row['teh_botol']){?>
-													<td class=" ">Teh Botol</td>
-													<td class=" "><?php echo $row['teh_botol'];?></td>
-												<?php	};?>
+														<td class=" "><?= $mnu['nama']?></td>
+														<td class=" "><?php echo $row[$nama];?></td>
+													<?php	}}?>
 											</tr>
 
 											<tr class=" ">
@@ -211,7 +161,7 @@ ob_start();
 					      </div>
 					    </div>
 					  </div>
-						<?php $no++; } ?>
+						<?php $no++;} ?>
 					</form>
 				</div>
             </div>
